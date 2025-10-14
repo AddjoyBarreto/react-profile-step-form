@@ -4,8 +4,9 @@ import { useTranslation } from 'react-i18next';
 import './i18n';
 import './index.css';
 import { FormProvider } from './context/FormContext';
-import ProgressBar from './components/ProgressBar';
 import LanguageSwitcher from './components/LanguageSwitcher';
+import Stepper from './components/Stepper';
+import { buildSteps } from './constants/steps';
 import Step1 from './pages/Step1';
 import Step2 from './pages/Step2';
 import Step3 from './pages/Step3';
@@ -14,6 +15,7 @@ import Confirm from './pages/Confirm';
 function WizardLayout({ children, step }: { children: React.ReactNode; step: number }) {
   const total = 3;
   const { t } = useTranslation();
+  const steps = buildSteps(t);
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <header className="sticky top-0 bg-white/80 backdrop-blur border-b">
@@ -25,9 +27,7 @@ function WizardLayout({ children, step }: { children: React.ReactNode; step: num
       <main className="max-w-4xl mx-auto px-4 py-6">
         <div className="mb-5 flex items-center justify-between">
           <div className="text-sm text-gray-600">{t('step')} {step} {t('of')} {total}</div>
-          <div className="w-56">
-            <ProgressBar current={step} total={total} />
-          </div>
+          <Stepper steps={steps} current={step} />
         </div>
         <div className="bg-white p-6 rounded-xl shadow-md ring-1 ring-black/5">
           {children}
