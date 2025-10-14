@@ -1,0 +1,46 @@
+{
+  "appTitle": "طلب الدعم الاجتماعي",
+  "next": "التالي",
+  "back": "السابق",
+  "submit": "إرسال",
+  "accept": "قبول",
+  "edit": "تحرير",
+  "discard": "تجاهل",
+  "helpMeWrite": "ساعدني في الكتابة",
+  "language": "اللغة",
+  "english": "الإنجليزية",
+  "arabic": "العربية",
+  "step": "الخطوة",
+  "of": "من",
+
+  "personalInfo": "المعلومات الشخصية",
+  "name": "الاسم",
+  "nationalId": "الهوية الوطنية",
+  "dob": "تاريخ الميلاد",
+  "gender": "النوع",
+  "address": "العنوان",
+  "city": "المدينة",
+  "state": "الولاية",
+  "country": "الدولة",
+  "phone": "الهاتف",
+  "email": "البريد الإلكتروني",
+
+  "familyFinancial": "معلومات الأسرة والمالية",
+  "maritalStatus": "الحالة الاجتماعية",
+  "dependents": "المعالون",
+  "employmentStatus": "حالة العمل",
+  "monthlyIncome": "الدخل الشهري",
+  "housingStatus": "حالة السكن",
+
+  "situations": "وصف الحالة",
+  "currentFinancialSituation": "الوضع المالي الحالي",
+  "employmentCircumstances": "ظروف العمل",
+  "reasonForApplying": "سبب التقديم",
+
+  "reviewTitle": "تم إرسال الطلب",
+  "reviewBody": "شكراً لك. تم إرسال طلبك.",
+
+  "required": "هذا الحقل مطلوب",
+  "invalidEmail": "يرجى إدخال بريد إلكتروني صالح",
+  "minChars": "يرجى إدخال {{count}} أحرف على الأقل"
+}

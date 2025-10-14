@@ -1,0 +1,46 @@
+{
+  "appTitle": "Social Support Application",
+  "next": "Next",
+  "back": "Back",
+  "submit": "Submit",
+  "accept": "Accept",
+  "edit": "Edit",
+  "discard": "Discard",
+  "helpMeWrite": "Help Me Write",
+  "language": "Language",
+  "english": "English",
+  "arabic": "Arabic",
+  "step": "Step",
+  "of": "of",
+
+  "personalInfo": "Personal Information",
+  "name": "Name",
+  "nationalId": "National ID",
+  "dob": "Date of Birth",
+  "gender": "Gender",
+  "address": "Address",
+  "city": "City",
+  "state": "State",
+  "country": "Country",
+  "phone": "Phone",
+  "email": "Email",
+
+  "familyFinancial": "Family & Financial Info",
+  "maritalStatus": "Marital Status",
+  "dependents": "Dependents",
+  "employmentStatus": "Employment Status",
+  "monthlyIncome": "Monthly Income",
+  "housingStatus": "Housing Status",
+
+  "situations": "Situation Descriptions",
+  "currentFinancialSituation": "Current Financial Situation",
+  "employmentCircumstances": "Employment Circumstances",
+  "reasonForApplying": "Reason for Applying",
+
+  "reviewTitle": "Application Submitted",
+  "reviewBody": "Thank you. Your application has been submitted.",
+
+  "required": "This field is required",
+  "invalidEmail": "Please enter a valid email",
+  "minChars": "Please enter at least {{count}} characters"
+}
