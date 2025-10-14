@@ -11,16 +11,22 @@ export default function LanguageSwitcher() {
     document.documentElement.lang = current;
   }, [current]);
 
+  const baseBtn = 'px-3 py-1.5 text-sm rounded-full transition-colors';
+  const active = 'bg-blue-600 text-white shadow';
+  const inactive = 'text-gray-700 hover:text-gray-900';
+
   return (
-    <div className="flex items-center gap-2" aria-label={t('language')}>
+    <div className="inline-flex items-center gap-1 bg-gray-100 rounded-full p-1" role="group" aria-label={t('language')}>
       <button
-        className={`px-3 py-1 rounded ${current === 'en' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
+        className={`${baseBtn} ${current === 'en' ? active : inactive}`}
+        aria-pressed={current === 'en'}
         onClick={() => i18n.changeLanguage('en')}
       >
         {t('english')}
       </button>
       <button
-        className={`px-3 py-1 rounded ${current === 'ar' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
+        className={`${baseBtn} ${current === 'ar' ? active : inactive}`}
+        aria-pressed={current === 'ar'}
         onClick={() => i18n.changeLanguage('ar')}
       >
         {t('arabic')}
