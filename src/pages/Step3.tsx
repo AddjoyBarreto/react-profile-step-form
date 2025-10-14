@@ -16,6 +16,7 @@ export default function Step3({ onBack, onSubmitFinal }: { onBack: () => void; o
   const [targetField, setTargetField] = useState<keyof Step3Data | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [fieldError, setFieldError] = useState('');
 
   const promptMap: Record<keyof Step3Data, string> = {
     currentFinancialSituation: 'Describe current financial situation to support assistance request.',
@@ -24,15 +25,27 @@ export default function Step3({ onBack, onSubmitFinal }: { onBack: () => void; o
   };
 
   const handleHelp = async (fieldName: keyof Step3Data) => {
+    const currentText = (watch(fieldName) as string) || '';
+    if (!currentText.trim()) {
+      const fieldLabels = {
+        currentFinancialSituation: 'Current Financial Situation',
+        employmentCircumstances: 'Employment Circumstances', 
+        reasonForApplying: 'Reason for Applying'
+      };
+      setFieldError(`Please write something in "${fieldLabels[fieldName]}" field first before using AI assistance`);
+      return;
+    }
+    
     setTargetField(fieldName);
-    setModalText((watch(fieldName) as string) || '');
+    setModalText(currentText);
     setModalOpen(true);
     setLoading(true);
     setError('');
+    setFieldError('');
     try {
       const key = process.env.REACT_APP_OPENAI_API_KEY as string | undefined;
       const suggestion = await generateAssistance({
-        prompt: promptMap[fieldName],
+        prompt: `${promptMap[fieldName]} Here's what the user wrote: "${currentText}"`,
         apiKey: key || '',
       });
       setModalText(suggestion);
@@ -55,23 +68,33 @@ export default function Step3({ onBack, onSubmitFinal }: { onBack: () => void; o
     onSubmitFinal(merged);
   };
 
-  const TextArea = ({ name, label, required }: { name: keyof Step3Data; label: string; required?: boolean }) => (
-    <label className="block">
-      <div className="flex items-center justify-between mb-1">
-        <span className="font-medium text-gray-700">{label}</span>
-        <button type="button" onClick={() => handleHelp(name)} className="px-2 py-1 text-sm rounded-lg bg-green-600 text-white hover:bg-green-700">
-          {t('helpMeWrite')}
-        </button>
-      </div>
-      <textarea className="w-full border border-gray-300 rounded-lg p-3 min-h-[120px] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" {...register(name, { required })} />
-      {errors[name] && <span className="text-red-600 text-sm">{t('required')}</span>}
-    </label>
-  );
+  const TextArea = ({ name, label, required }: { name: keyof Step3Data; label: string; required?: boolean }) => {
+    const fieldRegister = register(name, { required });
+    return (
+      <label className="block">
+        <div className="flex items-center justify-between mb-1">
+          <span className="font-medium text-gray-700">{label}</span>
+          <button type="button" onClick={() => handleHelp(name)} className="px-2 py-1 text-sm rounded-lg bg-green-600 text-white hover:bg-green-700">
+            {t('helpMeWrite')}
+          </button>
+        </div>
+        <textarea 
+          className="w-full border border-gray-300 rounded-lg p-3 min-h-[120px] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+          name={fieldRegister.name}
+          ref={fieldRegister.ref}
+          onChange={fieldRegister.onChange}
+          onBlur={fieldRegister.onBlur}
+        />
+        {errors[name] && <span className="text-red-600 text-sm">{t('required')}</span>}
+      </label>
+    );
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" aria-label={t('situations')}>
       <h2 className="text-xl font-semibold">{t('situations')}</h2>
       {error && <div className="text-red-700 bg-red-50 p-2 rounded" role="alert">{error}</div>}
+      {fieldError && <div className="text-red-700 bg-red-50 p-2 rounded" role="alert">{fieldError}</div>}
       <TextArea name="currentFinancialSituation" label={t('currentFinancialSituation')} required />
       <TextArea name="employmentCircumstances" label={t('employmentCircumstances')} required />
       <TextArea name="reasonForApplying" label={t('reasonForApplying')} required />
