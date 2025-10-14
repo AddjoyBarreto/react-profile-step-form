@@ -46,11 +46,11 @@ export default function Step1({ onNext }: { onNext: () => void }) {
 
   const Field = ({ name, label, type = 'text', required }: { name: keyof Step1Data; label: string; type?: string; required?: boolean }) => (
     <label className="block">
-      <span className="block mb-1 font-medium">{label}</span>
+      <span className="block mb-1 text-sm font-medium text-gray-700">{label}</span>
       <input
         type={type}
         aria-invalid={errors[name] ? 'true' : 'false'}
-        className="w-full border rounded p-2"
+        className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         {...register(name, { required })}
       />
       {errors[name] && <span className="text-red-600 text-sm">{t('required')}</span>}
@@ -64,7 +64,7 @@ export default function Step1({ onNext }: { onNext: () => void }) {
   ];
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" aria-label={t('personalInfo')}>
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" aria-label={t('personalInfo')}>
       <h2 className="text-xl font-semibold">{t('personalInfo')}</h2>
       {locError && <div className="text-red-700 bg-red-50 p-2 rounded" role="alert">{locError}</div>}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -121,10 +121,10 @@ export default function Step1({ onNext }: { onNext: () => void }) {
 
         <Field name="phone" label={t('phone')} required />
         <label className="block">
-          <span className="block mb-1 font-medium">{t('email')}</span>
+          <span className="block mb-1 text-sm font-medium text-gray-700">{t('email')}</span>
           <input
             type="email"
-            className="w-full border rounded p-2"
+            className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             {...register('email', {
               required: true,
               pattern: /[^@\s]+@[^@\s]+\.[^@\s]+/,
@@ -135,7 +135,7 @@ export default function Step1({ onNext }: { onNext: () => void }) {
         </label>
       </div>
       <div className="flex justify-end">
-        <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded" disabled={loadingLocations}>{t('next')}</button>
+        <button type="submit" className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700" disabled={loadingLocations}>{t('next')}</button>
       </div>
     </form>
   );

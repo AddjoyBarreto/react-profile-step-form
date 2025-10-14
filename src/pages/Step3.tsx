@@ -58,18 +58,18 @@ export default function Step3({ onBack, onSubmitFinal }: { onBack: () => void; o
   const TextArea = ({ name, label, required }: { name: keyof Step3Data; label: string; required?: boolean }) => (
     <label className="block">
       <div className="flex items-center justify-between mb-1">
-        <span className="font-medium">{label}</span>
-        <button type="button" onClick={() => handleHelp(name)} className="px-2 py-1 text-sm rounded bg-green-600 text-white">
+        <span className="font-medium text-gray-700">{label}</span>
+        <button type="button" onClick={() => handleHelp(name)} className="px-2 py-1 text-sm rounded-lg bg-green-600 text-white hover:bg-green-700">
           {t('helpMeWrite')}
         </button>
       </div>
-      <textarea className="w-full border rounded p-2 min-h-[120px]" {...register(name, { required })} />
+      <textarea className="w-full border border-gray-300 rounded-lg p-3 min-h-[120px] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" {...register(name, { required })} />
       {errors[name] && <span className="text-red-600 text-sm">{t('required')}</span>}
     </label>
   );
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" aria-label={t('situations')}>
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" aria-label={t('situations')}>
       <h2 className="text-xl font-semibold">{t('situations')}</h2>
       {error && <div className="text-red-700 bg-red-50 p-2 rounded" role="alert">{error}</div>}
       <TextArea name="currentFinancialSituation" label={t('currentFinancialSituation')} required />
@@ -77,8 +77,8 @@ export default function Step3({ onBack, onSubmitFinal }: { onBack: () => void; o
       <TextArea name="reasonForApplying" label={t('reasonForApplying')} required />
 
       <div className="flex justify-between">
-        <button type="button" onClick={onBack} className="px-4 py-2 bg-gray-200 rounded">{t('back')}</button>
-        <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded" disabled={loading}>{t('submit')}</button>
+        <button type="button" onClick={onBack} className="px-4 py-2 rounded-lg bg-gray-100 text-gray-800 hover:bg-gray-200">{t('back')}</button>
+        <button type="submit" className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700" disabled={loading}>{t('submit')}</button>
       </div>
 
       <AISuggestionModal

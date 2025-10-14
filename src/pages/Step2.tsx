@@ -16,11 +16,11 @@ export default function Step2({ onNext, onBack }: { onNext: () => void; onBack: 
 
   const Field = ({ name, label, type = 'text', required }: { name: keyof Step2Data; label: string; type?: string; required?: boolean }) => (
     <label className="block">
-      <span className="block mb-1 font-medium">{label}</span>
+      <span className="block mb-1 text-sm font-medium text-gray-700">{label}</span>
       <input
         type={type}
         aria-invalid={errors[name] ? 'true' : 'false'}
-        className="w-full border rounded p-2"
+        className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         {...register(name, { required })}
       />
       {errors[name] && <span className="text-red-600 text-sm">{t('required')}</span>}
@@ -48,7 +48,7 @@ export default function Step2({ onNext, onBack }: { onNext: () => void; onBack: 
   ];
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" aria-label={t('familyFinancial')}>
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" aria-label={t('familyFinancial')}>
       <h2 className="text-xl font-semibold">{t('familyFinancial')}</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Select
@@ -61,11 +61,7 @@ export default function Step2({ onNext, onBack }: { onNext: () => void; onBack: 
           error={errors.maritalStatus ? t('required') : ''}
         />
 
-        <label className="block">
-          <span className="block mb-1 font-medium">{t('dependents')}</span>
-          <input type="number" className="w-full border rounded p-2" {...register('dependents', { required: true })} />
-          {errors.dependents && <span className="text-red-600 text-sm">{t('required')}</span>}
-        </label>
+        <Field name="dependents" label={t('dependents')} type="number" required />
 
         <Select
           label={t('employmentStatus')}
@@ -77,11 +73,7 @@ export default function Step2({ onNext, onBack }: { onNext: () => void; onBack: 
           error={errors.employmentStatus ? t('required') : ''}
         />
 
-        <label className="block">
-          <span className="block mb-1 font-medium">{t('monthlyIncome')}</span>
-          <input type="number" className="w-full border rounded p-2" {...register('monthlyIncome', { required: true })} />
-          {errors.monthlyIncome && <span className="text-red-600 text-sm">{t('required')}</span>}
-        </label>
+        <Field name="monthlyIncome" label={t('monthlyIncome')} type="number" required />
 
         <Select
           label={t('housingStatus')}
@@ -94,8 +86,8 @@ export default function Step2({ onNext, onBack }: { onNext: () => void; onBack: 
         />
       </div>
       <div className="flex justify-between">
-        <button type="button" onClick={onBack} className="px-4 py-2 bg-gray-200 rounded">{t('back')}</button>
-        <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded">{t('next')}</button>
+        <button type="button" onClick={onBack} className="px-4 py-2 rounded-lg bg-gray-100 text-gray-800 hover:bg-gray-200">{t('back')}</button>
+        <button type="submit" className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700">{t('next')}</button>
       </div>
     </form>
   );

@@ -15,21 +15,21 @@ function WizardLayout({ children, step }: { children: React.ReactNode; step: num
   const total = 3;
   const { t } = useTranslation();
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-white border-b">
-        <div className="max-w-4xl mx-auto p-4 flex items-center justify-between">
-          <h1 className="text-lg font-semibold">{t('appTitle')}</h1>
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+      <header className="sticky top-0 bg-white/80 backdrop-blur border-b">
+        <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+          <h1 className="text-lg font-semibold tracking-tight">{t('appTitle')}</h1>
           <LanguageSwitcher />
         </div>
       </header>
-      <main className="max-w-4xl mx-auto p-4">
-        <div className="mb-4 flex items-center justify-between">
+      <main className="max-w-4xl mx-auto px-4 py-6">
+        <div className="mb-5 flex items-center justify-between">
           <div className="text-sm text-gray-600">{t('step')} {step} {t('of')} {total}</div>
-          <div className="w-48">
+          <div className="w-56">
             <ProgressBar current={step} total={total} />
           </div>
         </div>
-        <div className="bg-white p-4 rounded shadow">
+        <div className="bg-white p-6 rounded-xl shadow-md ring-1 ring-black/5">
           {children}
         </div>
       </main>
