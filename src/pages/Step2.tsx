@@ -7,7 +7,7 @@ import Select, { Option } from '../components/Select';
 export default function Step2({ onNext, onBack }: { onNext: () => void; onBack: () => void }) {
   const { data, setData } = useFormData();
   const { t } = useTranslation();
-  const { register, handleSubmit, formState: { errors }, watch, setValue } = useForm<Partial<Step2Data>>({ defaultValues: data.step2 || {} });
+  const { register, handleSubmit, formState: { errors } } = useForm<Partial<Step2Data>>({ defaultValues: data.step2 || {} });
 
   const onSubmit = (values: Partial<Step2Data>) => {
     setData({ ...data, step2: values });
@@ -53,11 +53,10 @@ export default function Step2({ onNext, onBack }: { onNext: () => void; onBack: 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Select
           label={t('maritalStatus')}
-          name="maritalStatus"
+         // name="maritalStatus"
           options={marital}
           required
-          value={(watch('maritalStatus') as string) || ''}
-          onChange={(e) => setValue('maritalStatus', e.target.value, { shouldValidate: true })}
+          {...register('maritalStatus', { required: true })}
           error={errors.maritalStatus ? t('required') : ''}
         />
 
@@ -65,11 +64,9 @@ export default function Step2({ onNext, onBack }: { onNext: () => void; onBack: 
 
         <Select
           label={t('employmentStatus')}
-          name="employmentStatus"
           options={employment}
           required
-          value={(watch('employmentStatus') as string) || ''}
-          onChange={(e) => setValue('employmentStatus', e.target.value, { shouldValidate: true })}
+          {...register('employmentStatus', { required: true })}
           error={errors.employmentStatus ? t('required') : ''}
         />
 
@@ -77,11 +74,9 @@ export default function Step2({ onNext, onBack }: { onNext: () => void; onBack: 
 
         <Select
           label={t('housingStatus')}
-          name="housingStatus"
           options={housing}
           required
-          value={(watch('housingStatus') as string) || ''}
-          onChange={(e) => setValue('housingStatus', e.target.value, { shouldValidate: true })}
+          {...register('housingStatus', { required: true })}
           error={errors.housingStatus ? t('required') : ''}
         />
       </div>

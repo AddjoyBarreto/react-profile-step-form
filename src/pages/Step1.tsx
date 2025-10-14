@@ -63,6 +63,10 @@ export default function Step1({ onNext }: { onNext: () => void }) {
     { value: 'other', label: 'Other' },
   ];
 
+  const countryReg = register('country', { required: true });
+  const stateReg = register('state', { required: true });
+  const cityReg = register('city', { required: true });
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" aria-label={t('personalInfo')}>
       <h2 className="text-xl font-semibold">{t('personalInfo')}</h2>
@@ -74,28 +78,22 @@ export default function Step1({ onNext }: { onNext: () => void }) {
 
         <Select
           label={t('gender')}
-          name="gender"
+          // name="gender"
           options={genderOptions}
           required
-          value={watch('gender') as string | undefined}
-          onChange={(e) => setValue('gender', e.target.value, { shouldValidate: true })}
+          {...register('gender', { required: true })}
           error={errors.gender ? t('required') : ''}
         />
 
         <Field name="address" label={t('address')} required />
-
-        {/* Hidden inputs register values for validation */}
-        <input type="hidden" value={watchCountry || ''} {...register('country', { required: true })} />
-        <input type="hidden" value={watchState || ''} {...register('state', { required: true })} />
-        <input type="hidden" value={(watch('city') as string) || ''} {...register('city', { required: true })} />
 
         <Select
           label={t('country')}
           name="country"
           options={countryOptions}
           required
-          value={watchCountry || ''}
-          onChange={(e) => { setValue('country', e.target.value, { shouldValidate: true }); setValue('state', ''); setValue('city', ''); }}
+          onChange={(e) => { countryReg.onChange(e); setValue('state', ''); setValue('city', ''); }}
+          ref={countryReg.ref}
           error={errors.country ? t('required') : ''}
         />
 
@@ -104,8 +102,8 @@ export default function Step1({ onNext }: { onNext: () => void }) {
           name="state"
           options={stateOptions}
           required
-          value={watchState || ''}
-          onChange={(e) => { setValue('state', e.target.value, { shouldValidate: true }); setValue('city', ''); }}
+          onChange={(e) => { stateReg.onChange(e); setValue('city', ''); }}
+          ref={stateReg.ref}
           error={errors.state ? t('required') : ''}
         />
 
@@ -114,8 +112,8 @@ export default function Step1({ onNext }: { onNext: () => void }) {
           name="city"
           options={cityOptions}
           required
-          value={(watch('city') as string) || ''}
-          onChange={(e) => setValue('city', e.target.value, { shouldValidate: true })}
+          onChange={cityReg.onChange}
+          ref={cityReg.ref}
           error={errors.city ? t('required') : ''}
         />
 
