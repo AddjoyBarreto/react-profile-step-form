@@ -3,7 +3,8 @@ import { useForm } from 'react-hook-form';
 import { useFormData, Step1Data } from '../context/FormContext';
 import { useTranslation } from 'react-i18next';
 import Select from '../components/Select';
-import { loadLocations, type Country } from '../data/loadLocations';
+import type { Country } from '../data/loadLocations';
+import { loadLocations } from '../data/loadLocations';
 
 export default function Step1({ onNext }: { onNext: () => void }) {
   const { data, setData } = useFormData();
