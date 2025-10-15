@@ -75,5 +75,13 @@
   "failedToGetSuggestion": "Failed to get suggestion",
   "steps": "Steps",
   "close": "Close",
-  "aiSuggestion": "AI Suggestion"
+  "aiSuggestion": "AI Suggestion",
+
+  "pageNotFound": "Page Not Found",
+  "pageNotFoundTitle": "404 - Page Not Found",
+  "pageNotFoundMessage": "Sorry, the page you are looking for doesn't exist.",
+  "goHome": "Go Home",
+  "goBack": "Go Back",
+  "needHelp": "Need Help?",
+  "needHelpMessage": "If you believe this is an error, please contact support or try refreshing the page."
 }

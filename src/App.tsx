@@ -11,6 +11,7 @@ import Step1 from './pages/Step1';
 import Step2 from './pages/Step2';
 import Step3 from './pages/Step3';
 import Confirm from './pages/Confirm';
+import NotFound from './pages/NotFound';
 
 function WizardLayout({ children, step }: { children: React.ReactNode; step: number }) {
   const total = 3;
@@ -28,6 +29,7 @@ function WizardLayout({ children, step }: { children: React.ReactNode; step: num
       </main>
   );
 }
+
 
 function WizardRoutes() {
   const navigate = useNavigate();
@@ -59,9 +61,11 @@ function WizardRoutes() {
       />
       <Route
         path="/confirm"
-        element={
-            <Confirm />
-        }
+        element={<Confirm />}
+      />
+      <Route
+        path="*"
+        element={<NotFound />}
       />
     </Routes>
   );

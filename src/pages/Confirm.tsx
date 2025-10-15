@@ -5,10 +5,10 @@ export default function Confirm() {
   const { t } = useTranslation();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      <div className="max-w-4xl mx-auto px-4 py-8">
+    <main className="max-w-4xl mx-auto px-4 py-6">
+      <div className="text-center">
         {/* Success Header */}
-        <div className="text-center mb-8">
+        <div className="mb-8">
           <div className="inline-flex items-center justify-center w-20 h-20 bg-green-100 rounded-full mb-4">
             <svg className="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -17,7 +17,6 @@ export default function Confirm() {
           <h1 className="text-3xl font-bold text-gray-900 mb-2">{t('reviewTitle')}</h1>
           <p className="text-lg text-gray-600">{t('reviewBody')}</p>
         </div>
-
 
         {/* Action Buttons */}
         <div className="mt-8 text-center">
@@ -32,6 +31,6 @@ export default function Confirm() {
           </button>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
