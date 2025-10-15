@@ -42,5 +42,28 @@
 
   "required": "This field is required",
   "invalidEmail": "Please enter a valid email",
-  "minChars": "Please enter at least {{count}} characters"
+  "minChars": "Please enter at least {{count}} characters",
+
+  "selectPlaceholder": "Select…",
+  "selectEmpty": "—",
+
+  "genderMale": "Male",
+  "genderFemale": "Female",
+  "genderOther": "Other",
+
+  "maritalSingle": "Single",
+  "maritalMarried": "Married",
+  "maritalDivorced": "Divorced",
+  "maritalWidowed": "Widowed",
+
+  "employmentEmployed": "Employed",
+  "employmentUnemployed": "Unemployed",
+  "employmentSelfEmployed": "Self-employed",
+  "employmentStudent": "Student",
+  "employmentRetired": "Retired",
+
+  "housingRent": "Rent",
+  "housingOwn": "Own",
+  "housingFamily": "Family",
+  "housingOther": "Other"
 }

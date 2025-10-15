@@ -28,15 +28,15 @@ export default function Step1({ onNext }: { onNext: () => void }) {
   const watchCountry = watch('country') as string | undefined;
   const watchState = watch('state') as string | undefined;
 
-  const countryOptions = useMemo(() => countriesData.map(c => ({ value: c.code, label: c.name })), [countriesData]);
+  const countryOptions = useMemo(() => countriesData.map(c => ({ value: c.id.toString(), label: c.name })), [countriesData]);
   const stateOptions = useMemo(() => {
-    const country = countriesData.find(c => c.code === watchCountry);
-    return country ? country.states.map(s => ({ value: s.code, label: s.name })) : [];
+    const country = countriesData.find(c => c.id.toString() === watchCountry);
+    return country ? country.states.map(s => ({ value: s.id.toString(), label: s.name })) : [];
   }, [countriesData, watchCountry]);
   const cityOptions = useMemo(() => {
-    const country = countriesData.find(c => c.code === watchCountry);
-    const st = country?.states.find(s => s.code === watchState);
-    return st ? st.cities.map(ci => ({ value: ci.code, label: ci.name })) : [];
+    const country = countriesData.find(c => c.id.toString() === watchCountry);
+    const st = country?.states.find(s => s.id.toString() === watchState);
+    return st ? st.cities.map(ci => ({ value: ci.id.toString(), label: ci.name })) : [];
   }, [countriesData, watchCountry, watchState]);
 
   const onSubmit = (values: Partial<Step1Data>) => {
@@ -58,9 +58,9 @@ export default function Step1({ onNext }: { onNext: () => void }) {
   );
 
   const genderOptions = [
-    { value: 'male', label: 'Male' },
-    { value: 'female', label: 'Female' },
-    { value: 'other', label: 'Other' },
+    { value: 'male', label: t('genderMale') },
+    { value: 'female', label: t('genderFemale') },
+    { value: 'other', label: t('genderOther') },
   ];
 
   const countryReg = register('country', { required: true });

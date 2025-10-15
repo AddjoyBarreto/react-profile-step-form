@@ -9,7 +9,10 @@ import { submitApplication } from '../services/mockApi';
 export default function Step3({ onBack, onSubmitFinal }: { onBack: () => void; onSubmitFinal: (data: unknown) => void }) {
   const { data, setData } = useFormData();
   const { t } = useTranslation();
-  const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm<Partial<Step3Data>>({ defaultValues: data.step3 || {} });
+  const { register, handleSubmit, setValue, watch, formState: { errors, isSubmitting } } = useForm<Partial<Step3Data>>({ 
+    defaultValues: data.step3 || {},
+    mode: 'onChange'
+  });
 
   const [modalOpen, setModalOpen] = useState(false);
   const [modalText, setModalText] = useState('');
@@ -74,16 +77,22 @@ export default function Step3({ onBack, onSubmitFinal }: { onBack: () => void; o
       <label className="block">
         <div className="flex items-center justify-between mb-1">
           <span className="font-medium text-gray-700">{label}</span>
-          <button type="button" onClick={() => handleHelp(name)} className="px-2 py-1 text-sm rounded-lg bg-green-600 text-white hover:bg-green-700">
+          <button 
+            type="button" 
+            onClick={() => handleHelp(name)} 
+            className="px-2 py-1 text-sm rounded-lg bg-green-600 text-white hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={loading || isSubmitting}
+          >
             {t('helpMeWrite')}
           </button>
         </div>
         <textarea 
-          className="w-full border border-gray-300 rounded-lg p-3 min-h-[120px] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+          className="w-full border border-gray-300 rounded-lg p-3 min-h-[120px] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-50 disabled:cursor-not-allowed" 
           name={fieldRegister.name}
           ref={fieldRegister.ref}
           onChange={fieldRegister.onChange}
           onBlur={fieldRegister.onBlur}
+          disabled={loading || isSubmitting}
         />
         {errors[name] && <span className="text-red-600 text-sm">{t('required')}</span>}
       </label>
@@ -100,8 +109,21 @@ export default function Step3({ onBack, onSubmitFinal }: { onBack: () => void; o
       <TextArea name="reasonForApplying" label={t('reasonForApplying')} required />
 
       <div className="flex justify-between">
-        <button type="button" onClick={onBack} className="px-4 py-2 rounded-lg bg-gray-100 text-gray-800 hover:bg-gray-200">{t('back')}</button>
-        <button type="submit" className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700" disabled={loading}>{t('submit')}</button>
+        <button 
+          type="button" 
+          onClick={onBack} 
+          className="px-4 py-2 rounded-lg bg-gray-100 text-gray-800 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          disabled={loading || isSubmitting}
+        >
+          {t('back')}
+        </button>
+        <button 
+          type="submit" 
+          className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed" 
+          disabled={loading || isSubmitting}
+        >
+          {t('submit')}
+        </button>
       </div>
 
       <AISuggestionModal

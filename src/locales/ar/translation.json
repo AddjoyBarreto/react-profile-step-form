@@ -42,5 +42,28 @@
 
   "required": "هذا الحقل مطلوب",
   "invalidEmail": "يرجى إدخال بريد إلكتروني صالح",
-  "minChars": "يرجى إدخال {{count}} أحرف على الأقل"
+  "minChars": "يرجى إدخال {{count}} أحرف على الأقل",
+
+  "selectPlaceholder": "اختر...",
+  "selectEmpty": "—",
+
+  "genderMale": "ذكر",
+  "genderFemale": "أنثى",
+  "genderOther": "آخر",
+
+  "maritalSingle": "أعزب",
+  "maritalMarried": "متزوج",
+  "maritalDivorced": "مطلق",
+  "maritalWidowed": "أرمل",
+
+  "employmentEmployed": "موظف",
+  "employmentUnemployed": "عاطل عن العمل",
+  "employmentSelfEmployed": "يعمل لحسابه الخاص",
+  "employmentStudent": "طالب",
+  "employmentRetired": "متقاعد",
+
+  "housingRent": "إيجار",
+  "housingOwn": "ملك",
+  "housingFamily": "عائلة",
+  "housingOther": "آخر"
 }

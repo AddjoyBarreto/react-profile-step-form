@@ -25,11 +25,11 @@ function WizardLayout({ children, step }: { children: React.ReactNode; step: num
         </div>
       </header>
       <main className="max-w-4xl mx-auto px-4 py-6">
-        <div className="mb-5 flex items-center justify-between">
-          <div className="text-sm text-gray-600">{t('step')} {step} {t('of')} {total}</div>
+        <div className="mb-5">
+          <div className="text-sm text-gray-600 mb-3 text-center sm:text-left">{t('step')} {step} {t('of')} {total}</div>
           <Stepper steps={steps} current={step} />
         </div>
-        <div className="bg-white p-6 rounded-xl shadow-md ring-1 ring-black/5">
+        <div className="bg-white p-4 sm:p-6 rounded-xl shadow-md ring-1 ring-black/5">
           {children}
         </div>
       </main>
