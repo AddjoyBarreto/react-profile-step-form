@@ -42,5 +42,38 @@
 
   "required": "هذا الحقل مطلوب",
   "invalidEmail": "يرجى إدخال بريد إلكتروني صالح",
-  "minChars": "يرجى إدخال {{count}} أحرف على الأقل"
+  "mustBe18": "يجب أن يكون العمر 18 عامًا على الأقل",
+  "invalidPhone": "يرجى إدخال رقم هاتف صالح",
+  "countryCode": "رمز الدولة",
+  "minChars": "يرجى إدخال {{count}} أحرف على الأقل",
+
+  "selectPlaceholder": "اختر...",
+  "selectEmpty": "—",
+
+  "genderMale": "ذكر",
+  "genderFemale": "أنثى",
+  "genderOther": "آخر",
+
+  "maritalSingle": "أعزب",
+  "maritalMarried": "متزوج",
+  "maritalDivorced": "مطلق",
+  "maritalWidowed": "أرمل",
+
+  "employmentEmployed": "موظف",
+  "employmentUnemployed": "عاطل عن العمل",
+  "employmentSelfEmployed": "يعمل لحسابه الخاص",
+  "employmentStudent": "طالب",
+  "employmentRetired": "متقاعد",
+
+  "housingRent": "إيجار",
+  "housingOwn": "ملك",
+  "housingFamily": "عائلة",
+  "housingOther": "آخر",
+
+  "noCitiesAvailable": "لا توجد مدن متاحة",
+  "failedToLoadLocations": "فشل في تحميل المواقع",
+  "failedToGetSuggestion": "فشل في الحصول على الاقتراح",
+  "steps": "الخطوات",
+  "close": "إغلاق",
+  "aiSuggestion": "اقتراح الذكاء الاصطناعي"
 }

@@ -42,5 +42,38 @@
 
   "required": "This field is required",
   "invalidEmail": "Please enter a valid email",
-  "minChars": "Please enter at least {{count}} characters"
+  "mustBe18": "You must be at least 18 years old",
+  "invalidPhone": "Please enter a valid phone number",
+  "countryCode": "Country Code",
+  "minChars": "Please enter at least {{count}} characters",
+
+  "selectPlaceholder": "Select…",
+  "selectEmpty": "—",
+
+  "genderMale": "Male",
+  "genderFemale": "Female",
+  "genderOther": "Other",
+
+  "maritalSingle": "Single",
+  "maritalMarried": "Married",
+  "maritalDivorced": "Divorced",
+  "maritalWidowed": "Widowed",
+
+  "employmentEmployed": "Employed",
+  "employmentUnemployed": "Unemployed",
+  "employmentSelfEmployed": "Self-employed",
+  "employmentStudent": "Student",
+  "employmentRetired": "Retired",
+
+  "housingRent": "Rent",
+  "housingOwn": "Own",
+  "housingFamily": "Family",
+  "housingOther": "Other",
+
+  "noCitiesAvailable": "No cities available",
+  "failedToLoadLocations": "Failed to load locations",
+  "failedToGetSuggestion": "Failed to get suggestion",
+  "steps": "Steps",
+  "close": "Close",
+  "aiSuggestion": "AI Suggestion"
 }

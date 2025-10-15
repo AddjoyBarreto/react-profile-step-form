@@ -6,9 +6,10 @@ export type Step1Data = {
   dob: string;
   gender: string;
   address: string;
-  city: string;
+  city: string | null;
   state: string;
   country: string;
+  countryCode: string;
   phone: string;
   email: string;
 };
@@ -38,6 +39,7 @@ const STORAGE_KEY = 'app.form.data.v1';
 type FormContextValue = {
   data: FormData;
   setData: React.Dispatch<React.SetStateAction<FormData>>;
+  clearData: () => void;
 };
 
 const FormContext = createContext<FormContextValue | null>(null);
@@ -58,7 +60,14 @@ export function FormProvider({ children }: { children: React.ReactNode }) {
     } catch {}
   }, [data]);
 
-  const value = useMemo(() => ({ data, setData }), [data]);
+  const clearData = () => {
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+      setData({});
+    } catch {}
+  };
+
+  const value = useMemo(() => ({ data, setData, clearData }), [data]);
   return <FormContext.Provider value={value}>{children}</FormContext.Provider>;
 }
 
