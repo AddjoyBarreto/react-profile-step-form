@@ -1,55 +1,71 @@
-# Social Support Application (Frontend)
+# Social Support Application
 
-A 3-step React wizard to help citizens apply for financial assistance. Includes AI-assisted writing via OpenAI, English/Arabic with RTL support, accessibility basics, and local persistence.
+A 3-step React form for citizens to apply for financial assistance. Built with TypeScript, includes AI writing help, and supports English/Arabic with RTL.
 
-## Prerequisites
-- Node.js 18+
-- An OpenAI API key
+## Quick Start
 
-## Setup
-1. Install dependencies:
 ```bash
 npm install
-```
-
-2. Configure environment:
-Create a `.env` file in the project root with:
-```bash
-REACT_APP_OPENAI_API_KEY=your_openai_api_key_here
-```
-
-3. Start the app:
-```bash
 npm start
 ```
-Then open `http://localhost:3000`.
 
-## Features
-- Multi-step form (Personal Info → Family & Financial → Situation Descriptions)
-- Progress bar and responsive Tailwind UI
-- English and Arabic translations with RTL toggle
-- Keyboard accessible components and ARIA roles where appropriate
-- LocalStorage save/resume
-- AI “Help Me Write” for Step 3 textareas using OpenAI Chat Completions (gpt-3.5-turbo)
-- Mock submit API and confirmation screen
+Open `http://localhost:3000` and you're good to go!
+
+## What's Inside
+
+- **3-step wizard**: Personal info → Family & financial → Situation descriptions
+- **AI writing assistance**: Optional OpenAI integration for Step 3 text areas
+- **Full i18n support**: English/Arabic with RTL layout
+- **Smart forms**: Auto-save, validation, and data persistence
+- **Location picker**: Country/state/city dropdowns with 200+ countries
+- **Responsive design**: Works great on mobile and desktop
+
+## Tech Stack
+
+- React 19 + TypeScript
+- React Hook Form for form handling
+- Tailwind CSS for styling
+- i18next for translations
+- React Router for navigation
+
+## Optional: AI Features
+
+If you want the AI writing assistance, add your OpenAI API key:
+
+```bash
+# .env
+REACT_APP_OPENAI_API_KEY=your_key_here
+```
+
+Without it, the app works fine - users just won't get AI suggestions.
 
 ## Project Structure
-- `src/i18n.js` and `src/locales/*`: i18n setup and translations
-- `src/context/FormContext.js`: global form data with LocalStorage persistence
-- `src/pages/Step1.js`, `Step2.js`, `Step3.js`: wizard steps
-- `src/components/*`: reusable UI components (progress bar, language switcher, AI modal)
-- `src/services/openai.js`: OpenAI integration with timeout and error handling
-- `src/services/mockApi.js`: simulated submit
 
-## OpenAI API
-- Endpoint: `https://api.openai.com/v1/chat/completions`
-- Model: `gpt-3.5-turbo`
-- The API key is read from `REACT_APP_OPENAI_API_KEY`.
+```
+src/
+├── components/     # UI components (Navbar, Stepper, Select, etc.)
+├── pages/         # Step1, Step2, Step3, Confirm
+├── context/       # Form state management
+├── locales/       # English/Arabic translations
+├── data/          # Location data and loaders
+└── services/      # OpenAI and mock API
+```
 
-## Accessibility
-- Keyboard focus management in modal
-- ARIA roles/labels on progress and dialogs
+## Form Data
 
-## Notes
-- Tailwind configured via `tailwind.config.js` and `postcss.config.js`; CSS imports in `src/index.css`.
-- This is a client-only demo. Do not expose real API keys in production.
+The app collects:
+- **Step 1**: Personal details, address, contact info
+- **Step 2**: Marital status, employment, income, housing
+- **Step 3**: Financial situation, circumstances, reasons for applying
+
+All data is saved to localStorage and cleared after successful submission.
+
+## Development
+
+```bash
+npm start    # Dev server
+npm build    # Production build
+npm test     # Run tests
+```
+
+Built with Create React App, so all the standard CRA scripts work.
