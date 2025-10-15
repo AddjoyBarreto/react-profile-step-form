@@ -64,8 +64,6 @@ All data is saved to localStorage and cleared after successful submission.
 
 ```bash
 npm start    # Dev server
-npm build    # Production build
-npm test     # Run tests
 ```
 
 Built with Create React App, so all the standard CRA scripts work.
