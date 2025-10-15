@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useFormData, Step2Data } from '../context/FormContext';
 import { useTranslation } from 'react-i18next';
 import Select, { Option } from '../components/Select';
+import Field from '../components/Field';
 
 export default function Step2({ onNext, onBack }: { onNext: () => void; onBack: () => void }) {
   const { data, setData } = useFormData();
@@ -14,18 +15,6 @@ export default function Step2({ onNext, onBack }: { onNext: () => void; onBack: 
     onNext();
   };
 
-  const Field = ({ name, label, type = 'text', required }: { name: keyof Step2Data; label: string; type?: string; required?: boolean }) => (
-    <label className="block">
-      <span className="block mb-1 text-sm font-medium text-gray-700">{label}</span>
-      <input
-        type={type}
-        aria-invalid={errors[name] ? 'true' : 'false'}
-        className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-        {...register(name, { required })}
-      />
-      {errors[name] && <span className="text-red-600 text-sm">{t('required')}</span>}
-    </label>
-  );
 
   const marital: Option[] = [
     { value: 'single', label: t('maritalSingle') },
@@ -60,7 +49,7 @@ export default function Step2({ onNext, onBack }: { onNext: () => void; onBack: 
           error={errors.maritalStatus ? t('required') : ''}
         />
 
-        <Field name="dependents" label={t('dependents')} type="number" required />
+        <Field name="dependents" label={t('dependents')} type="number" required register={register} errors={errors} />
 
         <Select
           label={t('employmentStatus')}
@@ -70,7 +59,7 @@ export default function Step2({ onNext, onBack }: { onNext: () => void; onBack: 
           error={errors.employmentStatus ? t('required') : ''}
         />
 
-        <Field name="monthlyIncome" label={t('monthlyIncome')} type="number" required />
+        <Field name="monthlyIncome" label={t('monthlyIncome')} type="number" required register={register} errors={errors} />
 
         <Select
           label={t('housingStatus')}

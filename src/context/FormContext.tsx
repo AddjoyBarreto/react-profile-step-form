@@ -9,6 +9,7 @@ export type Step1Data = {
   city: string | null;
   state: string;
   country: string;
+  countryCode: string;
   phone: string;
   email: string;
 };

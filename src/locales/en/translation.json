@@ -42,6 +42,9 @@
 
   "required": "This field is required",
   "invalidEmail": "Please enter a valid email",
+  "mustBe18": "You must be at least 18 years old",
+  "invalidPhone": "Please enter a valid phone number",
+  "countryCode": "Country Code",
   "minChars": "Please enter at least {{count}} characters",
 
   "selectPlaceholder": "Select…",

@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useFormData, Step3Data } from '../context/FormContext';
 import { useTranslation } from 'react-i18next';
 import AISuggestionModal from '../components/AISuggestionModal';
+import TextArea from '../components/TextArea';
 import { generateAssistance } from '../services/openai';
 import { submitApplication } from '../services/mockApi';
 
@@ -72,42 +73,39 @@ export default function Step3({ onBack, onSubmitFinal }: { onBack: () => void; o
     onSubmitFinal(merged);
   };
 
-  const TextArea = ({ name, label, required }: { name: keyof Step3Data; label: string; required?: boolean }) => {
-    const fieldRegister = register(name, { required });
-    return (
-      <label className="block">
-        <div className="flex items-center justify-between mb-1">
-          <span className="font-medium text-gray-700">{label}</span>
-          <button 
-            type="button" 
-            onClick={() => handleHelp(name)} 
-            className="px-2 py-1 text-sm rounded-lg bg-green-600 text-white hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
-            disabled={loading || isSubmitting}
-          >
-            {t('helpMeWrite')}
-          </button>
-        </div>
-        <textarea 
-          className="w-full border border-gray-300 rounded-lg p-3 min-h-[120px] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-50 disabled:cursor-not-allowed" 
-          name={fieldRegister.name}
-          ref={fieldRegister.ref}
-          onChange={fieldRegister.onChange}
-          onBlur={fieldRegister.onBlur}
-          disabled={loading || isSubmitting}
-        />
-        {errors[name] && <span className="text-red-600 text-sm">{t('required')}</span>}
-      </label>
-    );
-  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" aria-label={t('situations')}>
       <h2 className="text-xl font-semibold">{t('situations')}</h2>
       {error && <div className="text-red-700 bg-red-50 p-2 rounded" role="alert">{error}</div>}
       {fieldError && <div className="text-red-700 bg-red-50 p-2 rounded" role="alert">{fieldError}</div>}
-      <TextArea name="currentFinancialSituation" label={t('currentFinancialSituation')} required />
-      <TextArea name="employmentCircumstances" label={t('employmentCircumstances')} required />
-      <TextArea name="reasonForApplying" label={t('reasonForApplying')} required />
+      <TextArea 
+        name="currentFinancialSituation" 
+        label={t('currentFinancialSituation')} 
+        required 
+        register={register} 
+        errors={errors}
+        onHelpClick={() => handleHelp('currentFinancialSituation')}
+        disabled={loading || isSubmitting}
+      />
+      <TextArea 
+        name="employmentCircumstances" 
+        label={t('employmentCircumstances')} 
+        required 
+        register={register} 
+        errors={errors}
+        onHelpClick={() => handleHelp('employmentCircumstances')}
+        disabled={loading || isSubmitting}
+      />
+      <TextArea 
+        name="reasonForApplying" 
+        label={t('reasonForApplying')} 
+        required 
+        register={register} 
+        errors={errors}
+        onHelpClick={() => handleHelp('reasonForApplying')}
+        disabled={loading || isSubmitting}
+      />
 
       <div className="flex justify-between">
         <button 
