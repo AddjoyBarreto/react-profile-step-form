@@ -20,10 +20,10 @@ export default function Step1({ onNext }: { onNext: () => void }) {
     setLoadingLocations(true);
     loadLocations()
       .then((res) => { if (mounted) setCountriesData(res); })
-      .catch((e) => { if (mounted) setLocError(e?.message || 'Failed to load locations'); })
+      .catch((e) => { if (mounted) setLocError(e?.message || t('failedToLoadLocations')); })
       .finally(() => { if (mounted) setLoadingLocations(false); });
     return () => { mounted = false; };
-  }, []);
+  }, [t]);
 
   const watchCountry = watch('country') as string | undefined;
   const watchState = watch('state') as string | undefined;
@@ -36,26 +36,39 @@ export default function Step1({ onNext }: { onNext: () => void }) {
   const cityOptions = useMemo(() => {
     const country = countriesData.find(c => c.id.toString() === watchCountry);
     const st = country?.states.find(s => s.id.toString() === watchState);
-    return st ? st.cities.map(ci => ({ value: ci.id.toString(), label: ci.name })) : [];
-  }, [countriesData, watchCountry, watchState]);
+    if (!st || st.cities.length === 0) {
+      return [{ value: 'null', label: t('noCitiesAvailable') }];
+    }
+    return st.cities.map(ci => ({ value: ci.id.toString(), label: ci.name }));
+  }, [countriesData, watchCountry, watchState, t]);
 
   const onSubmit = (values: Partial<Step1Data>) => {
-    setData({ ...data, step1: values });
+    // Convert 'null' string to actual null for city field
+    const processedValues = {
+      ...values,
+      city: values.city === 'null' ? null : values.city
+    };
+    setData({ ...data, step1: processedValues });
     onNext();
   };
 
-  const Field = ({ name, label, type = 'text', required }: { name: keyof Step1Data; label: string; type?: string; required?: boolean }) => (
-    <label className="block">
-      <span className="block mb-1 text-sm font-medium text-gray-700">{label}</span>
-      <input
-        type={type}
-        aria-invalid={errors[name] ? 'true' : 'false'}
-        className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-        {...register(name, { required })}
-      />
-      {errors[name] && <span className="text-red-600 text-sm">{t('required')}</span>}
-    </label>
-  );
+  const Field = ({ name, label, type = 'text', required }: { name: keyof Step1Data; label: string; type?: string; required?: boolean }) => {
+    const fieldRegister = register(name, { required });
+    return (
+      <label className="block">
+        <span className="block mb-1 text-sm font-medium text-gray-700">{label}</span>
+        <input
+          type={type}
+          aria-invalid={errors[name] ? 'true' : 'false'}
+          className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          {...fieldRegister}
+          onChange={fieldRegister.onChange}
+          onBlur={fieldRegister.onBlur}
+        />
+        {errors[name] && <span className="text-red-600 text-sm">{t('required')}</span>}
+      </label>
+    );
+  };
 
   const genderOptions = [
     { value: 'male', label: t('genderMale') },
@@ -65,7 +78,7 @@ export default function Step1({ onNext }: { onNext: () => void }) {
 
   const countryReg = register('country', { required: true });
   const stateReg = register('state', { required: true });
-  const cityReg = register('city', { required: true });
+  const cityReg = register('city', { required: cityOptions.length > 1 ? true : false });
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" aria-label={t('personalInfo')}>
@@ -111,7 +124,7 @@ export default function Step1({ onNext }: { onNext: () => void }) {
           label={t('city')}
           name="city"
           options={cityOptions}
-          required
+          required={cityOptions.length > 1}
           onChange={cityReg.onChange}
           ref={cityReg.ref}
           error={errors.city ? t('required') : ''}

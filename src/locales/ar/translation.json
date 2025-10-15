@@ -65,5 +65,12 @@
   "housingRent": "إيجار",
   "housingOwn": "ملك",
   "housingFamily": "عائلة",
-  "housingOther": "آخر"
+  "housingOther": "آخر",
+
+  "noCitiesAvailable": "لا توجد مدن متاحة",
+  "failedToLoadLocations": "فشل في تحميل المواقع",
+  "failedToGetSuggestion": "فشل في الحصول على الاقتراح",
+  "steps": "الخطوات",
+  "close": "إغلاق",
+  "aiSuggestion": "اقتراح الذكاء الاصطناعي"
 }

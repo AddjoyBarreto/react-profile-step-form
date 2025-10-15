@@ -65,5 +65,12 @@
   "housingRent": "Rent",
   "housingOwn": "Own",
   "housingFamily": "Family",
-  "housingOther": "Other"
+  "housingOther": "Other",
+
+  "noCitiesAvailable": "No cities available",
+  "failedToLoadLocations": "Failed to load locations",
+  "failedToGetSuggestion": "Failed to get suggestion",
+  "steps": "Steps",
+  "close": "Close",
+  "aiSuggestion": "AI Suggestion"
 }

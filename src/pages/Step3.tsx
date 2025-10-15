@@ -7,7 +7,7 @@ import { generateAssistance } from '../services/openai';
 import { submitApplication } from '../services/mockApi';
 
 export default function Step3({ onBack, onSubmitFinal }: { onBack: () => void; onSubmitFinal: (data: unknown) => void }) {
-  const { data, setData } = useFormData();
+  const { data, setData, clearData } = useFormData();
   const { t } = useTranslation();
   const { register, handleSubmit, setValue, watch, formState: { errors, isSubmitting } } = useForm<Partial<Step3Data>>({ 
     defaultValues: data.step3 || {},
@@ -53,7 +53,7 @@ export default function Step3({ onBack, onSubmitFinal }: { onBack: () => void; o
       });
       setModalText(suggestion);
     } catch (e: any) {
-      setError(e?.message || 'Failed to get suggestion');
+      setError(e?.message || t('failedToGetSuggestion'));
     } finally {
       setLoading(false);
     }
@@ -68,6 +68,7 @@ export default function Step3({ onBack, onSubmitFinal }: { onBack: () => void; o
     const merged = { ...data, step3: values };
     setData(merged);
     await submitApplication(merged);
+    clearData(); // Clear localStorage after successful submission
     onSubmitFinal(merged);
   };
 

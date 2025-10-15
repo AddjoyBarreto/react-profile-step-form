@@ -1,10 +1,12 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 type Step = { id: number; label: string };
 
 export default function Stepper({ steps, current }: { steps: Step[]; current: number }) {
+  const { t } = useTranslation();
   return (
-    <ol className="flex items-center w-full" aria-label="Steps">
+    <ol className="flex items-center w-full" aria-label={t('steps')}>
       {steps.map((step, idx) => {
         const isActive = step.id === current;
         const isDone = step.id < current;
